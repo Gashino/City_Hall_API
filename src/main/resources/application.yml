@@ -1,0 +1,15 @@
+spring:
+
+  application:
+    name: dev
+
+#database
+
+
+#security
+security:
+  jwt:
+    expiration-minutes: 30
+    secret-key: bXktU2VjcmV0LUtleS0xMjM0NTIzMTItMzIxMjM9MTIzNDUxMg==
+#general config
+
