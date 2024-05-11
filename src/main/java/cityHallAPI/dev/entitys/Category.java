@@ -3,21 +3,20 @@ package cityHallAPI.dev.entitys;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "rubro")
+@Table(name = "rubros")
 public class Category {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
+    @Column(name = "idRubro")
+    private int categoryId;
+
+    @Column(name = "descripcion")
     private String description;
 
     public Category() {
     }
 
-    public Category(String description) {
-        this.description = description;
-    }
-
-    public Long getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 }

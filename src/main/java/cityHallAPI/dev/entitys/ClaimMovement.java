@@ -8,20 +8,24 @@ import java.util.Date;
 @Table(name = "movimientosreclamo")
 public class ClaimMovement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Claim claim; // TODO
-    private User responsible; // TODO
+    @Column(name = "idMovimiento")
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "idReclamo")
+    private Claim claim;
+
+    @Column(name = "responsable")
+    private String responsible;
+
+    @Column(name = "causa")
     private String cause;
+
+    @Column(name = "fecha")
     private Date date;
 
     public ClaimMovement() {
     }
 
-    public ClaimMovement(Claim claim, User responsible, String cause) {
-        this.claim = claim;
-        this.responsible = responsible;
-        this.cause = cause;
-        this.date = new Date();
-    }
+
 }

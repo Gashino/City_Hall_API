@@ -1,10 +1,10 @@
 spring:
-
   application:
     name: dev
-
-#database
-
+  datasource:
+    url: 
+    username: 
+    password: 
 
 #security
 security:

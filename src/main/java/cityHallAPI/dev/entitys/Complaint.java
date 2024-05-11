@@ -1,61 +1,42 @@
 package cityHallAPI.dev.entitys;
 
 import cityHallAPI.dev.utill.Status;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import javax.naming.Name;
+import java.util.List;
+
+@Entity
+@Table(name = "denuncias")
 public class Complaint {
 
     @Id
+    @Column(name = "idDenuncias")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String dni;
+    private int idComplaint;
+
+    @ManyToOne
+    @JoinColumn(name = "documento")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "idSitio")
     private Site site;
+
+    @Column(name = "descripcion")
     private String description;
+
+    @Column(name = "estado")
     private Status status;
+
+    @Column(name = "aceptaResponsabilidad")
     private boolean responsability;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
+    private List<ComplaintMovement> movements;
 
     public Complaint() {
     }
 
-    public Complaint(String description, String dni, Site site) {
-        this.description = description;
-        this.dni = dni;
-        this.site = site;
-        this.status = Status.PENDIENTE;
-        this.responsability = true;
-    }
 
-    public Complaint(Long id, String dni, Site site, String description, Status status) {
-        this.id = id;
-        this.dni = dni;
-        this.site = site;
-        this.description = description;
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public Site getSite() {
-        return site;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public boolean getResponsability() {
-        return responsability;
-    }
 }
