@@ -4,83 +4,47 @@ import jakarta.persistence.*;
 
 import java.sql.Time;
 
+
 @Entity
 @Table(name = "sitios")
 public class Site {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long siteId;
-    private Double latitude;
-    private Double longitude;
+    @Column(name = "idSitio")
+    private int siteId;
+
+    @Column(name = "latitud")
+    private double latitude;
+
+    @Column(name = "longitud")
+    private double longitude;
+
+    @Column(name = "calle")
     private String street;
+
+    @Column(name = "numero")
     private int number;
+
+    @Column(name = "entreAalleA")
     private String streetA;
+
+    @Column(name = "entreCalleB")
     private String streetB;
+
+    @Column(name = "descripcion")
     private String description;
+
+    @Column(name = "acargoDe")
     private String by;
-    private Time Open;
-    private Time Close;
+
+    @Column(name = "apertura")
+    private Time open;
+
+    @Column(name = "cierre")
+    private Time close;
+
+    @Column(name = "comentarios")
+    private String comments;
 
     public Site() {
-    }
-
-    public Site(Double latitude, Double longitude, String street, int number, String streetA, String streetB, String description, String by, Time open, Time close) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.street = street;
-        this.number = number;
-        this.streetA = streetA;
-        this.streetB = streetB;
-        this.description = description;
-        this.by = by;
-        Open = open;
-        Close = close;
-    }
-
-    // Getters
-
-
-    public Long getSiteId() {
-        return siteId;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public String getStreetA() {
-        return streetA;
-    }
-
-    public String getStreetB() {
-        return streetB;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public Time getOpen() {
-        return Open;
-    }
-
-    public Time getClose() {
-        return Close;
     }
 }

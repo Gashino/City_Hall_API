@@ -7,14 +7,28 @@ import java.util.Date;
 @Entity
 @Table(name = "personal")
 public class Employee {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
+    @Column(name = "legajo")
+    private int employeeId;
+
+    @Column(name = "nombre")
     private String name;
+
+    @Column(name = "apellido")
     private String lastName;
+
+    @Column(name = "documento")
     private String document;
+
+    @Column(name = "sector")
     private String Department;
+
+    @ManyToOne
+    @JoinColumn(name = "idRubro")
     private Category category; //TODO
+
+    @Column(name = "fechaIngreso")
     private Date startDate;
 
     public Employee() {
@@ -29,7 +43,7 @@ public class Employee {
         this.startDate = startDate;
     }
 
-    public Long getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 

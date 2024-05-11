@@ -1,32 +1,35 @@
 package cityHallAPI.dev.entitys;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Value;
 @Entity
-@Table(name = "users")
+@Table(name = "usuarios")
 public class User {
-    @Id
-    private String dni;
 
+    @Id
+    @Column(name = "dni")
+    private String document;
+    @Basic
     private String email;
+    @Basic
     private String password;
+    @Basic
     private boolean isActive;
+    @Basic
     private boolean isAdmin;
 
     public User() {
     }
 
-    public User(String dni, String email, String password) {
-        this.dni = dni;
+    public User(String document, String email, String password) {
+        this.document = document;
         this.email = email;
         this.password = password;
         this.isActive = true;
         this.isAdmin = false;
     }
     public String getDni() {
-        return dni;
+        return document;
     }
 
     public String getEmail() {
