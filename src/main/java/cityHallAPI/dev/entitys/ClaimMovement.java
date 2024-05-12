@@ -9,7 +9,7 @@ import java.util.Date;
 public class ClaimMovement {
     @Id
     @Column(name = "idMovimiento")
-    private int id;
+    private int idMovement;
 
     @ManyToOne
     @JoinColumn(name = "idReclamo")
