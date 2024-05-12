@@ -1,5 +1,6 @@
 package cityHallAPI.dev.services;
 
+import cityHallAPI.dev.dtos.UserAdminDto;
 import cityHallAPI.dev.dtos.UserDto;
 import cityHallAPI.dev.entitys.Neighbor;
 import cityHallAPI.dev.entitys.User;
@@ -9,6 +10,7 @@ import cityHallAPI.dev.repository.NeighborRepository;
 import cityHallAPI.dev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public class UserService implements IUserService {
@@ -67,12 +69,36 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void changePassword(String mail, String password) throws UserException{
+    public void changePassword(String mail, String newPassword) throws UserException{
+        Optional<User> userOpt = userRepository.findByEmail(mail);
 
+        if(userOpt.isPresent()){
+            User user = userOpt.get();
+            user.setPassword(newPassword);
+
+            userRepository.save(user);
+        }
+        else {
+            throw new UserException("Error cambiando la clave...");
+        }
     }
 
     @Override
     public void forgotPassword(String mail) throws UserException{
+        Optional<User> userOpt = userRepository.findByEmail(mail);
+        if(userOpt.isPresent()){
+            User user = userOpt.get();
 
+            //TODO -> enviar mail!
+
+        }
     }
+
+    @Override
+    public UserAdminDto loginAdmin(String email, String password) throws UserException {
+        return null;
+
+        //TODO -> Crear entity personal y completar
+    }
+
 }
