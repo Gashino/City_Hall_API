@@ -9,7 +9,8 @@ public class User {
     @Id
     @Column(name = "dni")
     private String document;
-    @Basic
+
+    @Column(name = "mail")
     private String email;
     @Basic
     private String password;

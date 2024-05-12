@@ -2,22 +2,26 @@ package cityHallAPI.dev.dtos;
 
 public class UserDto {
 
-    String name;
+    public String name;
 
-    String lastName;
+    public String surname;
 
-    String document;
+    public String document;
 
-    String email;
+    public String email;
 
     public boolean isActive;
 
 
-    public UserDto(String name, String lastName, String document,
+    public UserDto(String name, String surname, String document,
                    String email) {
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.document = document;
         this.email = email;
+    }
+
+    public UserDto() {
+
     }
 }

@@ -38,14 +38,21 @@ public class UserService implements IUserService {
 
     @Override
     public UserDto login(String email, String password) throws UserException{
-        Optional<User> userOptional = userRepository.findByMailAndPassword(email,password);
+        Optional<User> userOptional = userRepository.findByEmailAndPassword(email,password);
 
         if(userOptional.isPresent()) {
             User user = userOptional.get();
             Neighbor neighbor = neighborRepository.findById(user.getDocument()).get();
 
-            UserDto userDto = new UserDto(neighbor.getName(), neighbor.getSurname(), neighbor.getDocument(),
-                    user.getEmail());
+//            UserDto userDto = new UserDto(neighbor.getName(), neighbor.getSurname(), neighbor.getDocument(),
+//                    user.getEmail());
+            UserDto userDto= new UserDto()
+            {{
+                name= neighbor.getName();
+                surname=neighbor.getSurname();
+                document= neighbor.getDocument();
+                email= user.getEmail();
+            }};
 
             if(user.isActive()){
                 userDto.isActive = true;
