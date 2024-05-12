@@ -15,8 +15,6 @@ public class User {
     private String password;
     @Basic
     private boolean isActive;
-    @Basic
-    private boolean isAdmin;
 
     public User() {
     }
@@ -26,17 +24,24 @@ public class User {
         this.email = email;
         this.password = password;
         this.isActive = true;
-        this.isAdmin = false;
-    }
-    public String getDni() {
-        return document;
     }
 
+    public String getDocument() {
+        return document;
+    }
     public String getEmail() {
         return email;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
