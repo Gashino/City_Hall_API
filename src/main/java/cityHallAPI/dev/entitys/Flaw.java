@@ -9,7 +9,7 @@ public class Flaw {
 
     @Id
     @Column(name = "idDesperfecto")
-    private int flawId;
+    private int idFlaw;
 
     @Column(name = "descripcion")
     private String description;

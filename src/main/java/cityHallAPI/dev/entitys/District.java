@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "barrio")
 public class District {
+
     @Id
-    private int id;
+    @Column(name = "idBarrio")
+    private int idDistrict;
 
     @Column(name = "nombre")
     private String name;

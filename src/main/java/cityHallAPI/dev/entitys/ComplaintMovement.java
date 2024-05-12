@@ -9,8 +9,8 @@ import java.util.List;
 @Table(name = "movimientosdenuncia")
 public class ComplaintMovement {
     @Id
-    @Column(name = "idDenuncia")
-    private int id;
+    @Column(name = "idMovimiento")
+    private int idMovement;
 
     @ManyToOne
     @JoinColumn(name = "idDenuncias")
