@@ -9,14 +9,13 @@ public class User {
     @Id
     @Column(name = "dni")
     private String document;
-    @Basic
+
+    @Column(name = "mail")
     private String email;
     @Basic
     private String password;
     @Basic
     private boolean isActive;
-    @Basic
-    private boolean isAdmin;
 
     public User() {
     }
@@ -26,17 +25,36 @@ public class User {
         this.email = email;
         this.password = password;
         this.isActive = true;
-        this.isAdmin = false;
-    }
-    public String getDni() {
-        return document;
     }
 
+    public String getDocument() {
+        return document;
+    }
     public String getEmail() {
         return email;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
