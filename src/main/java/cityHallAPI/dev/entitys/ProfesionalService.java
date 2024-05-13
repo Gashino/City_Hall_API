@@ -5,9 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "serviciosprofesionales")
+@Table(name = "servicios")
 public class ProfesionalService extends Service{
-
 
     @Column(name = "horarios")
     private String hours;
@@ -21,14 +20,16 @@ public class ProfesionalService extends Service{
     @Column(name = "apellido")
     private String surname;
 
+
     public ProfesionalService(){}
 
-    public ProfesionalService(int idService, String document, String title, String description, String hours, String category, String name, String surname) {
-        super(idService, document, title, description);
+    public ProfesionalService(String document, String title, String description, String hours, String category, String name, String surname) {
+        super(document, title, description);
         this.hours = hours;
         this.category = category;
         this.name = name;
         this.surname = surname;
+        this.setProfesional(true);
     }
 
     public String getHours() {

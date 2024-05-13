@@ -23,14 +23,17 @@ public class Service {
     @Basic
     private boolean isActive;
 
+    @Basic
+    private boolean isProfesional;
+
     public Service(){}
 
-    public Service(int idService, String document, String title, String description) {
-        this.idService = idService;
+    public Service(String document, String title, String description) {
         this.document = document;
         this.title = title;
         this.description = description;
         this.isActive = false;
+        this.isProfesional = false;
     }
 
     public int getIdService() {
@@ -71,5 +74,13 @@ public class Service {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public boolean isProfesional() {
+        return isProfesional;
+    }
+
+    public void setProfesional(boolean profesional) {
+        isProfesional = profesional;
     }
 }
