@@ -10,8 +10,6 @@ public interface IUserService {
 
     public UserDto login(String email, String password) throws UserException;
 
-    public UserAdminDto loginAdmin(String email, String password) throws UserException;
-
     public void changePassword(String mail, String password) throws UserException;
 
     public void forgotPassword(String mail) throws UserException;

@@ -12,6 +12,9 @@ public class Employee {
     @Column(name = "legajo")
     private int employeeId;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "nombre")
     private String name;
 
@@ -22,7 +25,7 @@ public class Employee {
     private String document;
 
     @Column(name = "sector")
-    private String Department;
+    private String department;
 
     @ManyToOne
     @JoinColumn(name = "idRubro")
@@ -38,7 +41,7 @@ public class Employee {
         this.name = name;
         this.lastName = lastName;
         this.document = document;
-        Department = department;
+        this.department = department;
         this.category = category;
         this.startDate = startDate;
     }
@@ -60,7 +63,7 @@ public class Employee {
     }
 
     public String getDepartment() {
-        return Department;
+        return department;
     }
 
     public Category getCategory() {

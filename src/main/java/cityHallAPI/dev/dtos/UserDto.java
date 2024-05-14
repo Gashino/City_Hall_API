@@ -12,6 +12,8 @@ public class UserDto {
 
     public boolean isActive;
 
+    public boolean isAdmin;
+
 
     public UserDto(String name, String surname, String document,
                    String email) {
@@ -19,6 +21,7 @@ public class UserDto {
         this.surname = surname;
         this.document = document;
         this.email = email;
+        this.isAdmin=false;
     }
 
     public UserDto() {
