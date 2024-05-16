@@ -12,9 +12,11 @@ public class User {
 
     @Column(name = "mail")
     private String email;
+
     @Basic
     private String password;
-    @Basic
+
+    @Column(name = "isActive")
     private boolean isActive;
 
     public User() {
