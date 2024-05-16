@@ -1,15 +1,37 @@
 spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
   application:
     name: dev
   datasource:
-    url: 
-    username: 
-    password: 
+    url: jdbc:mysql://localhost:3306/municipios?user=root
+    username: root
+    password: Juanceto01
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cityhallapi@gmail.com
+    password: jaub pbaz bdsu ayae
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 #security
 security:
   jwt:
     expiration-minutes: 30
     secret-key: bXktU2VjcmV0LUtleS0xMjM0NTIzMTItMzIxMjM9MTIzNDUxMg==
-#general config
 
+#general config
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace

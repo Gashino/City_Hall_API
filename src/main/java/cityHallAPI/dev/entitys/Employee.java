@@ -29,7 +29,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "idRubro")
-    private Category category; //TODO
+    private Category category;
 
     @Column(name = "fechaIngreso")
     private Date startDate;

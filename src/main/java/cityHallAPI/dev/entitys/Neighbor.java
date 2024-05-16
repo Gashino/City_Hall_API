@@ -20,7 +20,7 @@ public class Neighbor {
     private String adress;
 
     @ManyToOne
-    @JoinColumn(name = "codigobarrio")
+    @JoinColumn(name = "idbarrio")
     private District district;
 
     public Neighbor(){}

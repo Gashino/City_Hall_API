@@ -10,14 +10,16 @@ import cityHallAPI.dev.interfaces.IUserService;
 import cityHallAPI.dev.repository.EmployeeRepository;
 import cityHallAPI.dev.repository.NeighborRepository;
 import cityHallAPI.dev.repository.UserRepository;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import cityHallAPI.dev.utill.PasswordGenerator;
 
-import javax.swing.text.html.Option;
-import java.net.http.HttpClient;
-import java.net.http.HttpResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
 import java.util.Optional;
 
+
+@Service
 public class UserService implements IUserService {
 
     @Autowired
@@ -26,18 +28,28 @@ public class UserService implements IUserService {
     NeighborRepository neighborRepository;
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    EmailSender emailSender;
+
+    public UserService() {
+
+    }
 
     @Override
-    public void addUser(String document, String email, String password) throws UserException{
+    public void addUser(String document, String email) throws UserException{
 
         Optional<Neighbor> neighbor = neighborRepository.findById(document);
+
         Optional<User> user = userRepository.findById(document);
 
         if(user.isEmpty() && neighbor.isPresent()){
+
+            String password = PasswordGenerator.getAlphaNumericString(8);
             User newUser = new User(document,email,password);
             userRepository.save(newUser);
 
-            //TODO -> Enviar mail(?
+            emailSender.sendEmail(email,"Registro exitoso","Muchas gracias por registrarse en el sistema CityHall..." +
+                    "Su clave es: " + password);
         }
         else{
             throw new UserException("Error registrando el usuario");
@@ -47,7 +59,9 @@ public class UserService implements IUserService {
     @Override
     public UserDto login(String access, String password) throws UserException{
         Optional<User> userOptional = userRepository.findByEmailAndPassword(access,password);
-        Optional<Employee> employeeOptional = employeeRepository.findByEmployeeIdAndPassword(Integer.parseInt(access),password);
+
+        Optional<Employee> employeeOptional = access.matches("[0-9]+") ?
+                employeeRepository.findByEmployeeIdAndPassword(Integer.parseInt(access),password) : Optional.empty();
 
         if(userOptional.isPresent()) {
             User user = userOptional.get();
@@ -109,7 +123,7 @@ public class UserService implements IUserService {
         if(userOpt.isPresent()){
             User user = userOpt.get();
 
-            //TODO -> enviar mail!
+            emailSender.sendEmail(mail,"Recuperar clave","Su clave es: " + user.getPassword());
 
         }
     }
