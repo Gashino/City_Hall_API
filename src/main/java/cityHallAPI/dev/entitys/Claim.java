@@ -43,5 +43,16 @@ public class Claim {
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "claim")
     private List<ClaimMovement> movements;
 
+
+    public Claim(User user, Employee employee, Site site, Flaw flaw ,
+                 String description, String status) {
+        this.flaw = flaw;
+        this.user = user;
+        this.employee = employee;
+        this.site = site;
+        this.description = description;
+        this.status = status;
+    }
+
     public Claim(){}
 }

@@ -1,4 +1,7 @@
 package cityHallAPI.dev.repository;
 
-public interface ClaimRepository {
+import cityHallAPI.dev.entitys.Claim;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ClaimRepository extends JpaRepository<Claim, Integer>{
 }
