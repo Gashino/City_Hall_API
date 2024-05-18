@@ -32,6 +32,10 @@ public class Complaint {
     @Column(name = "aceptaResponsabilidad")
     private boolean responsability;
 
+    @ManyToOne
+    @JoinColumn(name = "dni")
+    private User denounced;
+
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
     private List<ComplaintMovement> movements;
 
