@@ -6,10 +6,7 @@ import cityHallAPI.dev.entitys.Site;
 import cityHallAPI.dev.entitys.User;
 import cityHallAPI.dev.exceptions.ComplaintException;
 import cityHallAPI.dev.interfaces.IComplaintService;
-import cityHallAPI.dev.repository.CategoryRepository;
-import cityHallAPI.dev.repository.ComplaintRepository;
-import cityHallAPI.dev.repository.SiteRepository;
-import cityHallAPI.dev.repository.UserRepository;
+import cityHallAPI.dev.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -23,11 +20,12 @@ public class ComplaintsService implements IComplaintService {
     UserRepository userRepository;
     CategoryRepository categoryRepository;
     SiteRepository siteRepository;
+    ComplaintIssuerRepository complaintIssuerRepository;
 
 
 
     @Override
-    public void adComplaint(String document, int idSite, String description,String documentDenounced) throws ComplaintException {
+    public void addComplaint(String document, int idSite, String description,String documentDenounced) throws ComplaintException {
             Optional<User> userOptional = userRepository.findById(document);
             Optional<User> denouncedOptional = userRepository.findById(documentDenounced);
             Optional<Site> siteOptional = siteRepository.findById(idSite);
@@ -57,7 +55,7 @@ public class ComplaintsService implements IComplaintService {
         if(userOptional.isPresent()){
             List<ComplaintDTO> complaintsDTO = new ArrayList<>();
             List<Complaint> complaints = complaintRepository.findByUser(userOptional.get());
-            complaints.addAll(complaintRepository.findByDenounced(userOptional.get()));
+            complaints.addAll(complaintIssuerRepository.findByUser(userOptional.get()));
             complaints.forEach(x -> complaintsDTO.add(new ComplaintDTO(){
                 {
                     idComplaint = x.getIdComplaint();
