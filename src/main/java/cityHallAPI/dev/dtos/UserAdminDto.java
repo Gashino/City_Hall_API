@@ -23,6 +23,7 @@ public class UserAdminDto extends UserDto {
             this.department = department;
             this.category = category;
             this.startDate = startDate;
+            this.isActive = true;
         }
 
     public UserAdminDto() {
