@@ -3,9 +3,11 @@ package cityHallAPI.dev.entitys;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.DiscriminatorValue;
 
 @Entity
 @Table(name = "servicios")
+@DiscriminatorValue("profesional")
 public class ProfesionalService extends Service{
 
     @Column(name = "horarios")

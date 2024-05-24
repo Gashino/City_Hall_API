@@ -1,8 +1,7 @@
 package cityHallAPI.dev.interfaces;
 
-import cityHallAPI.dev.dtos.ServiceDto;
 import cityHallAPI.dev.entitys.Service;
-import org.hibernate.service.spi.ServiceException;
+import cityHallAPI.dev.exceptions.ServiceException;
 
 import java.util.List;
 
