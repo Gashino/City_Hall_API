@@ -1,6 +1,8 @@
 package cityHallAPI.dev.controllers;
 
 import cityHallAPI.dev.dtos.UserDto;
+import cityHallAPI.dev.dtos.UserLoginDTO;
+import cityHallAPI.dev.entitys.User;
 import cityHallAPI.dev.exceptions.UserException;
 import cityHallAPI.dev.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,11 @@ public class UserControler {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/register?dni={dni}&email={email}")
+    @PostMapping("/register")
     public ResponseEntity<Object> createUser(@RequestParam("dni") String dni,
                                              @RequestParam("email") String email) {
         try {
+
             userService.addUser(dni, email);
             //devuelve un estado 201 (creado)
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -31,11 +34,10 @@ public class UserControler {
 
     }
 
-    @PostMapping("/auth/login")
-    public ResponseEntity<Object> login(@RequestBody String email,
-                                        @RequestBody String password) {
+    @PutMapping("/auth/login")
+    public ResponseEntity<Object> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
-            UserDto uDto = userService.login(email, password);
+            UserDto uDto = userService.login(userLoginDTO.access, userLoginDTO.password);
             //devuelve un estado 200 (ok)
             return new ResponseEntity<>(uDto,HttpStatus.OK);
         } catch (UserException e) {
@@ -46,11 +48,10 @@ public class UserControler {
         }
     }
 
-    @PutMapping("/person/changePassword")
-    public ResponseEntity<Object> changePassword(@RequestBody String email,
-                                                @RequestBody String newPassword) {
+    @PutMapping("/changePassword")
+    public ResponseEntity<Object> changePassword(@RequestBody UserLoginDTO userLoginDTO) {
         try {
-            userService.changePassword(email, newPassword);
+            userService.changePassword(userLoginDTO.access, userLoginDTO.password);
             //devuelve un estado 200 (ok)
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserException e) {
