@@ -21,7 +21,6 @@ public class UserControler {
     public ResponseEntity<Object> createUser(@RequestParam("dni") String dni,
                                              @RequestParam("email") String email) {
         try {
-
             userService.addUser(dni, email);
             //devuelve un estado 201 (creado)
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -34,7 +33,7 @@ public class UserControler {
 
     }
 
-    @PutMapping("/auth/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<Object> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
             UserDto uDto = userService.login(userLoginDTO.access, userLoginDTO.password);
@@ -62,5 +61,18 @@ public class UserControler {
         }
     }
 
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<Object> forgotPassword(@RequestParam("email") String email) {
+        try {
+            userService.forgotPassword(email);
+            //devuelve un estado 200 (ok)
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (UserException e) {
+            e.printStackTrace();
+            //devuelve un mensaje de error y un estado 400
+            ResponseEntity<Object> respuesta = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return respuesta;
+        }
+    }
 
 }
