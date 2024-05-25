@@ -21,4 +21,27 @@ public class Flaw {
     public Flaw(){
     }
 
+    public int getIdFlaw() {
+        return idFlaw;
+    }
+
+    public void setIdFlaw(int idFlaw) {
+        this.idFlaw = idFlaw;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

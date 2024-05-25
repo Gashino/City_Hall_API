@@ -24,7 +24,7 @@ public class Site {
     @Column(name = "numero")
     private int number;
 
-    @Column(name = "entreAalleA")
+    @Column(name = "entreCalleA")
     private String streetA;
 
     @Column(name = "entreCalleB")
