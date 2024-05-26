@@ -13,6 +13,6 @@ public interface IComplaintService {
 
     public List<ComplaintDTO> getComplaintsByUser(String document) throws ComplaintException;
 
-    public Complaint getComplaintDetails(int idComplaint) throws ComplaintException;
+    public ComplaintDTO getComplaintDetails(int idComplaint) throws ComplaintException;
 
 }

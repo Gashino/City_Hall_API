@@ -15,7 +15,7 @@ public class ComplaintIssuer {
     @JoinColumn(name = "dni")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idDenuncias")
     private Complaint complaint;
 
@@ -29,5 +29,27 @@ public class ComplaintIssuer {
         this.complaint = complaint;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
 }
