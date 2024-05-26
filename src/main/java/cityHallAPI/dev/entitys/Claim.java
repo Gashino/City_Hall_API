@@ -45,13 +45,13 @@ public class Claim {
 
 
     public Claim(User user, Employee employee, Site site, Flaw flaw ,
-                 String description, String status) {
+                 String description) {
         this.flaw = flaw;
         this.user = user;
         this.employee = employee;
         this.site = site;
         this.description = description;
-        this.status = status;
+        this.status = Status.EN_PROCESO.toString();
     }
 
     public Claim(){}

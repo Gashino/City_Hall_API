@@ -21,12 +21,15 @@ public class ClaimService implements IClaimService {
 
     @Autowired
     ClaimRepository claimRepository;
+    @Autowired
     UserRepository userRepository;
+    @Autowired
     SiteRepository siteRepository;
+    @Autowired
     FlawRepository flawRepository;
 
     @Override
-    public void createClaim(String document, int idFlaw, int idSite, String description, String status) throws ClaimException {
+    public void createClaim(String document, int idFlaw, int idSite, String description) throws ClaimException {
         Optional<User> userOptional = userRepository.findById(document);
         Optional<Site> siteOptional = siteRepository.findById(idSite);
         Optional<Flaw> flawOptional = flawRepository.findById(idFlaw);
@@ -35,11 +38,10 @@ public class ClaimService implements IClaimService {
             throw new ClaimException("User, Site or Flaw not found");
         }
         else{
-            //TODO check if the user is an employee
             User user = userOptional.get();
             Site site = siteOptional.get();
             Flaw flaw = flawOptional.get();
-            Claim claim = new Claim(user, null, site, flaw, description, status);
+            Claim claim = new Claim(user, null, site, flaw, description);
             claimRepository.save(claim);
         }
     }
@@ -56,5 +58,10 @@ public class ClaimService implements IClaimService {
             throw new ClaimException("Claim not found");
         }
         return claimOptional.get();
+    }
+
+    @Override
+    public List<Claim> getByCategoryId(int idCategory) {
+        return claimRepository.findByCategoryId(idCategory);
     }
 }
