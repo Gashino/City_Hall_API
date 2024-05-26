@@ -2,7 +2,6 @@ package cityHallAPI.dev.controllers;
 
 import cityHallAPI.dev.dtos.UserDto;
 import cityHallAPI.dev.dtos.UserLoginDTO;
-import cityHallAPI.dev.entitys.User;
 import cityHallAPI.dev.exceptions.UserException;
 import cityHallAPI.dev.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

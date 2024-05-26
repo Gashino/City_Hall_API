@@ -27,14 +27,11 @@ public class Complaint {
     private String description;
 
     @Column(name = "estado")
-    private Status status;
+    private String status;
 
     @Column(name = "aceptaResponsabilidad")
     private boolean responsability;
 
-    @ManyToOne
-    @JoinColumn(name = "dni")
-    private User denounced;
 
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
     private List<ComplaintMovement> movements;
@@ -42,22 +39,14 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(User user, Site site, String description, User denounced) {
+    public Complaint(User user, Site site, String description) {
         this.user = user;
         this.site = site;
         this.description = description;
-        this.status = Status.PENDIENTE;
-        this.denounced = denounced;
+        this.status = Status.PENDIENTE.toString();
         this.responsability = true;
     }
 
-    public User getDenounced() {
-        return denounced;
-    }
-
-    public void setDenounced(User denounced) {
-        this.denounced = denounced;
-    }
 
     public int getIdComplaint() {
         return idComplaint;
@@ -91,11 +80,11 @@ public class Complaint {
         this.description = description;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -113,5 +102,18 @@ public class Complaint {
 
     public void setMovements(List<ComplaintMovement> movements) {
         this.movements = movements;
+    }
+
+    @Override
+    public String toString() {
+        return "Complaint{" +
+                "idComplaint=" + idComplaint +
+                ", user=" + user +
+                ", site=" + site +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", responsability=" + responsability +
+                ", movements=" + movements +
+                '}';
     }
 }

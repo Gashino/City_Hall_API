@@ -2,24 +2,32 @@ package cityHallAPI.dev.services;
 
 import cityHallAPI.dev.dtos.ComplaintDTO;
 import cityHallAPI.dev.entitys.Complaint;
+import cityHallAPI.dev.entitys.ComplaintIssuer;
 import cityHallAPI.dev.entitys.Site;
 import cityHallAPI.dev.entitys.User;
 import cityHallAPI.dev.exceptions.ComplaintException;
 import cityHallAPI.dev.interfaces.IComplaintService;
 import cityHallAPI.dev.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ComplaintsService implements IComplaintService {
 
     @Autowired
     ComplaintRepository complaintRepository;
+    @Autowired
     UserRepository userRepository;
+    @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
     SiteRepository siteRepository;
+    @Autowired
     ComplaintIssuerRepository complaintIssuerRepository;
 
 
@@ -36,13 +44,14 @@ public class ComplaintsService implements IComplaintService {
 
                 if(denouncedOptional.isPresent()){
                 User userDenunciado = denouncedOptional.get();
-                complaint = new Complaint(userDenunciante,null,description,userDenunciado);
+                complaint = new Complaint(userDenunciado,null,description);
                 }
                 else{
                 Site site = siteOptional.get();
-                complaint = new Complaint(userDenunciante,site,description,null);
+                complaint = new Complaint(null,site,description);
                 }
                 complaintRepository.save(complaint);
+                complaintIssuerRepository.save(new ComplaintIssuer(userDenunciante,complaint));
             }
             else{
                 throw new ComplaintException("Usuario, sitio o denunciado no encontrado");
@@ -55,18 +64,7 @@ public class ComplaintsService implements IComplaintService {
         if(userOptional.isPresent()){
             List<ComplaintDTO> complaintsDTO = new ArrayList<>();
             List<Complaint> complaints = complaintRepository.findByUser(userOptional.get());
-            complaints.addAll(complaintIssuerRepository.findByUser(userOptional.get()));
-            complaints.forEach(x -> complaintsDTO.add(new ComplaintDTO(){
-                {
-                    idComplaint = x.getIdComplaint();
-                    document = x.getUser().getDocument();
-                    siteStreet = x.getSite().getStreet();
-                    siteNumber = x.getSite().getNumber();
-                    description = x.getDescription();
-                    status = x.getStatus().toString();
-                    documentDenounced = x.getDenounced().getDocument();
-                }
-            }));
+            complaints.forEach(x -> complaintsDTO.add(new ComplaintDTO(x)));
             return complaintsDTO;
         }
         else{
@@ -75,10 +73,11 @@ public class ComplaintsService implements IComplaintService {
     }
 
     @Override
-    public Complaint getComplaintDetails(int idComplaint) throws ComplaintException {
+    public ComplaintDTO getComplaintDetails(int idComplaint) throws ComplaintException {
         Optional<Complaint> complaintOptional = complaintRepository.findById(idComplaint);
         if(complaintOptional.isPresent()){
-            return complaintOptional.get();
+            Complaint complaint = complaintOptional.get();
+            return new ComplaintDTO(complaint);
         }
         else{
             throw new ComplaintException("Denuncia no encontrada");

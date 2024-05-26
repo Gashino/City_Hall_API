@@ -1,16 +1,17 @@
 package cityHallAPI.dev.services;
 
-import cityHallAPI.dev.dtos.ServiceDto;
 import cityHallAPI.dev.entitys.ProfesionalService;
 import cityHallAPI.dev.entitys.Service;
+import cityHallAPI.dev.exceptions.ServiceException;
 import cityHallAPI.dev.interfaces.IServicesService;
 import cityHallAPI.dev.repository.ServiceRepository;
-import org.hibernate.service.spi.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+@org.springframework.stereotype.Service
 public class ServicesService implements IServicesService {
 
     @Autowired
@@ -60,6 +61,9 @@ public class ServicesService implements IServicesService {
 
     @Override
     public List<Service> getAllServices() throws ServiceException {
-        return serviceRepository.findAll();
+        List<Service> services = serviceRepository.findAll();
+        return services.stream()
+                .filter(Service::isActive)
+                .collect(Collectors.toList());
     }
 }
