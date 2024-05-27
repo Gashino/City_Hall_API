@@ -34,8 +34,8 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      name: 'PRODUCTION'
+      url: ${{ secrets.PRODUCTION }}
     permissions:
       id-token: write #This is required for requesting the JWT
 
