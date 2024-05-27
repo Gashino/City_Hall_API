@@ -8,14 +8,14 @@ import jakarta.persistence.*;
 public class Flaw {
 
     @Id
-    @Column(name = "idDesperfecto")
+    @Column(name = "iddesperfecto")
     private int idFlaw;
 
     @Column(name = "descripcion")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "idRubro")
+    @JoinColumn(name = "idrubro")
     private Category category;
 
     public Flaw(){

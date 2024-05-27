@@ -9,11 +9,11 @@ import java.util.List;
 @Table(name = "movimientosdenuncia")
 public class ComplaintMovement {
     @Id
-    @Column(name = "idMovimiento")
+    @Column(name = "idmovimiento")
     private int idMovement;
 
     @ManyToOne
-    @JoinColumn(name = "idDenuncias")
+    @JoinColumn(name = "iddenuncias")
     private Complaint complaint;
 
     @Column(name = "responsable")

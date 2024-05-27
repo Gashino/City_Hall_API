@@ -8,11 +8,11 @@ import java.util.Date;
 @Table(name = "movimientosreclamo")
 public class ClaimMovement {
     @Id
-    @Column(name = "idMovimiento")
+    @Column(name = "idmovimiento")
     private int idMovement;
 
     @ManyToOne
-    @JoinColumn(name = "idReclamo")
+    @JoinColumn(name = "idreclamo")
     private Claim claim;
 
     @Column(name = "responsable")

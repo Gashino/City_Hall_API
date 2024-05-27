@@ -28,10 +28,10 @@ public class Employee {
     private String department;
 
     @ManyToOne
-    @JoinColumn(name = "idRubro")
+    @JoinColumn(name = "idrubro")
     private Category category;
 
-    @Column(name = "fechaIngreso")
+    @Column(name = "fechaingreso")
     private Date startDate;
 
     public Employee() {

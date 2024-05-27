@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "servicios")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_servicio", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tiposervicio", discriminatorType = DiscriminatorType.STRING)
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idServicio")
+    @Column(name = "idservicio")
     private int idService;
 
     @Column(name = "documento")
@@ -22,10 +22,10 @@ public class Service {
     @Column(name = "descripcion")
     private String description;
 
-    @Basic
+    @Column(name = "isactive")
     private boolean isActive;
 
-    @Basic
+    @Column(name = "isprofesional")
     private boolean isProfesional;
 
     public Service(){}
