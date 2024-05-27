@@ -11,7 +11,7 @@ import java.util.List;
 public class Complaint {
 
     @Id
-    @Column(name = "idDenuncias")
+    @Column(name = "iddenuncias")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idComplaint;
 
@@ -20,7 +20,7 @@ public class Complaint {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "idSitio")
+    @JoinColumn(name = "idsitio")
     private Site site;
 
     @Column(name = "descripcion")
@@ -29,7 +29,7 @@ public class Complaint {
     @Column(name = "estado")
     private String status;
 
-    @Column(name = "aceptaResponsabilidad")
+    @Column(name = "aceptaresponsabilidad")
     private boolean responsability;
 
 

@@ -9,7 +9,7 @@ import java.sql.Time;
 @Table(name = "sitios")
 public class Site {
     @Id
-    @Column(name = "idSitio")
+    @Column(name = "idsitio")
     private int siteId;
 
     @Column(name = "latitud")
@@ -24,16 +24,16 @@ public class Site {
     @Column(name = "numero")
     private int number;
 
-    @Column(name = "entreCalleA")
+    @Column(name = "entrecallea")
     private String streetA;
 
-    @Column(name = "entreCalleB")
+    @Column(name = "entrecalleb")
     private String streetB;
 
     @Column(name = "descripcion")
     private String description;
 
-    @Column(name = "acargoDe")
+    @Column(name = "acargode")
     private String by;
 
     @Column(name = "apertura")

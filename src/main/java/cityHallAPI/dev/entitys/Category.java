@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Category {
 
     @Id
-    @Column(name = "idRubro")
+    @Column(name = "idrubro")
     private int categoryId;
 
     @Column(name = "descripcion")

@@ -11,7 +11,7 @@ import java.util.List;
 public class Claim {
 
     @Id
-    @Column(name = "id_reclamo")
+    @Column(name = "idreclamo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idClaim;
 
@@ -24,11 +24,11 @@ public class Claim {
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "id_sitio")
+    @JoinColumn(name = "idsitio")
     private Site site;
 
     @ManyToOne
-    @JoinColumn(name = "id_desperfecto")
+    @JoinColumn(name = "iddesperfecto")
     private Flaw flaw;
 
     @Column(name = "descripcion")
@@ -37,7 +37,7 @@ public class Claim {
     @Column(name = "estado")
     private String status;
 
-    @Column(name = "idReclamoUnificado")
+    @Column(name = "idreclamounificado")
     private int idUnifiedClaim;
 
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "claim")

@@ -16,7 +16,7 @@ public class ComplaintIssuer {
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idDenuncias")
+    @JoinColumn(name = "iddenuncias")
     private Complaint complaint;
 
 
