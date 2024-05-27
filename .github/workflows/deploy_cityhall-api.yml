@@ -35,7 +35,7 @@ jobs:
     needs: build
     environment:
       name: 'PRODUCTION'
-      url: '${{ secrets.PRODUCTION }}'
+      url: '${{ env.PRODUCTION }}'
     permissions:
       id-token: write #This is required for requesting the JWT
 
