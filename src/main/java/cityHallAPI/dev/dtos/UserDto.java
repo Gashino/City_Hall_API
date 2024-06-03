@@ -10,9 +10,13 @@ public class UserDto {
 
     public String email;
 
+    public String district;
+
     public boolean isActive;
 
     public boolean isAdmin;
+
+    public String direction;
 
 
     public UserDto(String name, String surname, String document,
