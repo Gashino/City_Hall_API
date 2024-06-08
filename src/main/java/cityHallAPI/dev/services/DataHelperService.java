@@ -46,12 +46,5 @@ public class DataHelperService {
     }
 
     public List<Neighbor> getNeighbors(){
-        List<User> users = userRepository.findAll();
-        List<String> userDocuments = users.stream()
-                .map(User::getDocument)
-                .toList();
-        return neighborRepository.findAll().stream()
-                .filter(neighbor -> userDocuments.contains(neighbor.getDocument()))
-                .collect(Collectors.toList());
-    }
+        return neighborRepository.findAll();}
 }

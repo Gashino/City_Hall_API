@@ -28,6 +28,11 @@ public class UserControler {
             //devuelve un mensaje de error y un estado 400
             ResponseEntity<Object> respuesta = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
             return respuesta;
+        } catch (IllegalAccessError e) {
+            e.printStackTrace();
+            //devuelve un mensaje de error y un estado 409
+            ResponseEntity<Object> respuesta = new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return respuesta;
         }
 
     }
