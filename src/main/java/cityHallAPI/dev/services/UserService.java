@@ -36,13 +36,16 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void addUser(String document, String email) throws UserException{
+    public void addUser(String document, String email) throws UserException, IllegalAccessError{
 
         Optional<Neighbor> neighbor = neighborRepository.findById(document);
 
         Optional<User> user = userRepository.findById(document);
+        if(user.isPresent()){
+            throw new IllegalAccessError("Usuario ya registrado");
+        }
 
-        if(user.isEmpty() && neighbor.isPresent()){
+        if(neighbor.isPresent()){
 
             String password = PasswordGenerator.getAlphaNumericString(8);
             User newUser = new User(document,email,password);

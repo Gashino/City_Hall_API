@@ -6,7 +6,7 @@ import cityHallAPI.dev.exceptions.UserException;
 
 public interface IUserService {
 
-    public void addUser(String document, String email) throws UserException;
+    public void addUser(String document, String email) throws UserException, IllegalAccessError;
 
     public UserDto login(String email, String password) throws UserException;
 
