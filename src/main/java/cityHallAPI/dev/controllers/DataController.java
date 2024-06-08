@@ -22,4 +22,9 @@ public class DataController {
     public Object getFlaws(){
         return dataHelperService.getFlaws();
     }
+
+    @GetMapping("/neighbors")
+    public Object getNeighbors(){
+        return dataHelperService.getNeighbors();
+    }
 }
