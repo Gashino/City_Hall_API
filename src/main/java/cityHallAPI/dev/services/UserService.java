@@ -71,8 +71,10 @@ public class UserService implements IUserService {
             {{
                 name= neighbor.getName();
                 surname=neighbor.getSurname();
+                direction= neighbor.getAdress();
                 document= neighbor.getDocument();
                 email= user.getEmail();
+                district = neighbor.getDistrict().getName();
                 isAdmin = false;
             }};
 

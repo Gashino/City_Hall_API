@@ -2,15 +2,16 @@ package cityHallAPI.dev.services;
 
 import cityHallAPI.dev.dtos.SiteDTO;
 import cityHallAPI.dev.entitys.Flaw;
+import cityHallAPI.dev.entitys.Neighbor;
 import cityHallAPI.dev.entitys.Site;
-import cityHallAPI.dev.repository.CategoryRepository;
-import cityHallAPI.dev.repository.FlawRepository;
-import cityHallAPI.dev.repository.SiteRepository;
+import cityHallAPI.dev.entitys.User;
+import cityHallAPI.dev.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DataHelperService {
@@ -21,7 +22,10 @@ public class DataHelperService {
     private FlawRepository flawRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-
+    @Autowired
+    private NeighborRepository neighborRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<SiteDTO> getSites(){
         List<Site> sites = siteRepository.findAll();
@@ -39,5 +43,15 @@ public class DataHelperService {
 
     public List<Flaw> getFlaws(){
         return flawRepository.findAll();
+    }
+
+    public List<Neighbor> getNeighbors(){
+        List<User> users = userRepository.findAll();
+        List<String> userDocuments = users.stream()
+                .map(User::getDocument)
+                .toList();
+        return neighborRepository.findAll().stream()
+                .filter(neighbor -> userDocuments.contains(neighbor.getDocument()))
+                .collect(Collectors.toList());
     }
 }
