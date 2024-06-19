@@ -11,18 +11,23 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-//@EnableScheduling
+@EnableScheduling
 public class NotificationsMonitor {
 
     @Autowired
     private ChangeRepository changeRepository;
 
-    @Scheduled(fixedRate = 5000)
+    @Autowired
+    private NotificationService notificationService;
+
+    @Scheduled(fixedRate = 10000)
     public void checkForChanges() {
         System.out.println("Checking for changes");
         List<Change> changes = changeRepository.findAllUnnotifiedChanges();
         for (Change change : changes) {
-//            notificationService.sendPushNotification(change.getExpoPushToken(), "Column Changed", "The column value has been updated.");
+            String tipoReclamo = change.getType();
+            notificationService.sendPushNotification(change.getExpoPushToken(), "Actualizacion en " + tipoReclamo, "Su " +
+                    tipoReclamo + " con ID #"+ change.getIdType() + " ha sido actualizado");
             change.setNotified(true);
             changeRepository.save(change);
         }
