@@ -36,7 +36,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void addUser(String document, String email) throws UserException, IllegalAccessError{
+    public void addUser(String document, String email, String tokenPush) throws UserException, IllegalAccessError{
 
         Optional<Neighbor> neighbor = neighborRepository.findById(document);
 
@@ -48,7 +48,7 @@ public class UserService implements IUserService {
         if(neighbor.isPresent()){
 
             String password = PasswordGenerator.getAlphaNumericString(8);
-            User newUser = new User(document,email,password);
+            User newUser = new User(document,email,password,tokenPush);
             userRepository.save(newUser);
 
             emailSender.sendEmail(email,"Registro exitoso","Muchas gracias por registrarse en el sistema CityHall..." +

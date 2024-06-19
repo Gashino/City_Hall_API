@@ -18,9 +18,11 @@ public class UserControler {
 
     @PostMapping("/register")
     public ResponseEntity<Object> createUser(@RequestParam("dni") String dni,
-                                             @RequestParam("email") String email) {
+                                             @RequestParam("email") String email,
+                                             @RequestParam("tokenPush") String tokenPush){
         try {
-            userService.addUser(dni, email);
+            System.out.println("dni: " + dni + " email: " + email + " tokenPush: " + tokenPush);
+            userService.addUser(dni, email,tokenPush);
             //devuelve un estado 201 (creado)
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (UserException e) {
