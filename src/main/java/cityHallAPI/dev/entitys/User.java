@@ -19,14 +19,27 @@ public class User {
     @Column(name = "isactive")
     private boolean isActive;
 
+    @Basic
+    private String expoPushToken;
+
     public User() {
     }
 
-    public User(String document, String email, String password) {
+    public User(String document, String email, String password, String expoPushToken) {
         this.document = document;
         this.email = email;
         this.password = password;
         this.isActive = true;
+        this.expoPushToken = expoPushToken;
+    }
+
+
+    public String getExpoPushToken() {
+        return expoPushToken;
+    }
+
+    public void setExpoPushToken(String expoPushToken) {
+        this.expoPushToken = expoPushToken;
     }
 
     public String getDocument() {
