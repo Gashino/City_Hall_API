@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class NotificationsMonitor {
 
     @Autowired
     private ChangeRepository changeRepository;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 5000)
     public void checkForChanges() {
         System.out.println("Checking for changes");
         List<Change> changes = changeRepository.findAllUnnotifiedChanges();

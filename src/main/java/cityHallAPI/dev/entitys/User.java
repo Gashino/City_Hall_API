@@ -19,7 +19,7 @@ public class User {
     @Column(name = "isactive")
     private boolean isActive;
 
-    @Basic
+    @Column(name = "expopushtoken")
     private String expoPushToken;
 
     public User() {
