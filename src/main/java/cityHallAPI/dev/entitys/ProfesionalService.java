@@ -1,9 +1,6 @@
 package cityHallAPI.dev.entitys;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "servicios")
@@ -13,8 +10,9 @@ public class ProfesionalService extends Service{
     @Column(name = "horarios")
     private String hours;
 
-    @Column(name = "rubro")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "rubro")
+    private Category category;
 
     @Column(name = "nombre")
     private String name;
@@ -25,7 +23,7 @@ public class ProfesionalService extends Service{
 
     public ProfesionalService(){}
 
-    public ProfesionalService(String document, String title, String description, String hours, String category, String name, String surname) {
+    public ProfesionalService(String document, String title, String description, String hours, Category category, String name, String surname) {
         super(document, title, description);
         this.hours = hours;
         this.category = category;
@@ -42,11 +40,11 @@ public class ProfesionalService extends Service{
         this.hours = hours;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

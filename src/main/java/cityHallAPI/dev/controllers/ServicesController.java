@@ -4,6 +4,7 @@ import cityHallAPI.dev.entitys.ProfesionalService;
 import cityHallAPI.dev.entitys.Service;
 import cityHallAPI.dev.exceptions.ServiceException;
 import cityHallAPI.dev.interfaces.IServicesService;
+import cityHallAPI.dev.utill.ServiceProfesionalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,9 +61,9 @@ public class ServicesController {
     }
 
     @PostMapping("/create/profesional")
-    public ResponseEntity<Object> createProfesionalService(@RequestBody ProfesionalService service) {
+    public ResponseEntity<Object> createProfesionalService(@RequestBody ServiceProfesionalDTO service) {
         try {
-            servicesService.addProfesionalService(service.getDocument(), service.getTitle(), service.getDescription(), service.getHours(), service.getCategory(), service.getName(), service.getSurname());
+            servicesService.addProfesionalService(service.getDocument(),service.getTitle(),service.getDescription(),service.getHours(),service.getCategoryId(),service.getName(),service.getSurname());
             return new ResponseEntity<>("Service created", HttpStatus.OK);
         } catch (ServiceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -1,9 +1,11 @@
 package cityHallAPI.dev.services;
 
+import cityHallAPI.dev.entitys.Category;
 import cityHallAPI.dev.entitys.ProfesionalService;
 import cityHallAPI.dev.entitys.Service;
 import cityHallAPI.dev.exceptions.ServiceException;
 import cityHallAPI.dev.interfaces.IServicesService;
+import cityHallAPI.dev.repository.CategoryRepository;
 import cityHallAPI.dev.repository.ServiceRepository;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,8 @@ public class ServicesService implements IServicesService {
 
     @Autowired
     ServiceRepository serviceRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
 
     @Override
@@ -29,8 +33,9 @@ public class ServicesService implements IServicesService {
     }
 
     @Override
-    public void addProfesionalService(String document, String title, String description, String hours, String category, String name, String surname) throws ServiceException {
+    public void addProfesionalService(String document, String title, String description, String hours, int idCategory, String name, String surname) throws ServiceException {
         try{
+            Category category = categoryRepository.findById(idCategory).get();
             Service service = new ProfesionalService(document, title, description, hours,category,name,surname);
             serviceRepository.save(service);
         }catch(Exception e){
@@ -50,7 +55,6 @@ public class ServicesService implements IServicesService {
     @Override
     public Service getService(int idService) throws ServiceException {
         Optional<Service> serviceOptional = serviceRepository.findById(idService);
-
         if(serviceOptional.isPresent()){
             return serviceOptional.get();
         }
