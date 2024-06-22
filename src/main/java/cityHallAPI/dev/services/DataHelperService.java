@@ -1,10 +1,7 @@
 package cityHallAPI.dev.services;
 
 import cityHallAPI.dev.dtos.SiteDTO;
-import cityHallAPI.dev.entitys.Flaw;
-import cityHallAPI.dev.entitys.Neighbor;
-import cityHallAPI.dev.entitys.Site;
-import cityHallAPI.dev.entitys.User;
+import cityHallAPI.dev.entitys.*;
 import cityHallAPI.dev.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +23,8 @@ public class DataHelperService {
     private NeighborRepository neighborRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ChangeRepository changeRepository;
 
     public List<SiteDTO> getSites(){
         List<Site> sites = siteRepository.findAll();
@@ -53,5 +52,13 @@ public class DataHelperService {
         return neighborRepository.findAll().stream()
                 .filter(neighbor -> userDocuments.contains(neighbor.getDocument()))
                 .collect(Collectors.toList());
+    }
+
+    public List<Change> getNotifications(String token){
+        return changeRepository.findByExpoPushToken(token);
+    }
+
+    public List<Category> getCategories(){
+        return categoryRepository.findAll();
     }
 }

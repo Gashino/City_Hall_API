@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class NotificationsMonitor {
 
     @Autowired

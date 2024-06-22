@@ -3,6 +3,7 @@ package cityHallAPI.dev.controllers;
 import cityHallAPI.dev.services.DataHelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,15 @@ public class DataController {
     public Object getNeighbors(){
         return dataHelperService.getNeighbors();
     }
+
+    @GetMapping("/notifications/{token}")
+    public Object getNotifications(@PathVariable String token){
+        return dataHelperService.getNotifications(token);
+    }
+
+    @GetMapping("/categories")
+    public Object getCategories(){
+        return dataHelperService.getCategories();
+    }
+
 }

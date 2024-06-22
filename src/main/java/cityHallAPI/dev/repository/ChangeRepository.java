@@ -9,4 +9,6 @@ import java.util.List;
 public interface ChangeRepository extends JpaRepository<Change, Integer>{
     @Query("SELECT c FROM Change c WHERE c.notified = false")
     List<Change> findAllUnnotifiedChanges();
+
+    List<Change> findByExpoPushToken(String expoPushToken);
 }
