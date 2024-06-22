@@ -57,4 +57,8 @@ public class DataHelperService {
     public List<Change> getNotifications(String token){
         return changeRepository.findByExpoPushToken(token);
     }
+
+    public List<Category> getCategories(){
+        return categoryRepository.findAll();
+    }
 }

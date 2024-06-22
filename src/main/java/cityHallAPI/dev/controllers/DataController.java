@@ -33,4 +33,10 @@ public class DataController {
     public Object getNotifications(@PathVariable String token){
         return dataHelperService.getNotifications(token);
     }
+
+    @GetMapping("/categories")
+    public Object getCategories(){
+        return dataHelperService.getCategories();
+    }
+
 }
