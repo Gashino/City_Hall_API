@@ -2,6 +2,8 @@ package cityHallAPI.dev.entitys;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "servicios")
 @DiscriminatorValue("profesional")
@@ -23,8 +25,8 @@ public class ProfesionalService extends Service{
 
     public ProfesionalService(){}
 
-    public ProfesionalService(String document, String title, String description, String hours, Category category, String name, String surname) {
-        super(document, title, description);
+    public ProfesionalService(String document, String title, String description, List<String> images, String hours, Category category, String name, String surname) {
+        super(document, title, description,images);
         this.hours = hours;
         this.category = category;
         this.name = name;

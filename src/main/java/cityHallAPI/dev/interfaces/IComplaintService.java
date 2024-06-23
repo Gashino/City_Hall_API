@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IComplaintService {
 
-    public void addComplaint(String document, int idSite,String description, String documentDenounced) throws ComplaintException;
+    public void addComplaint(String document, int idSite,String description, String documentDenounced,List<String>images) throws ComplaintException;
 
     public List<ComplaintDTO> getComplaintsByUser(String document) throws ComplaintException;
 

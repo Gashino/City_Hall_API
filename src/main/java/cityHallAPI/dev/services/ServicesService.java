@@ -23,9 +23,9 @@ public class ServicesService implements IServicesService {
 
 
     @Override
-    public void addNormalService(String document, String title, String description) throws ServiceException {
+    public void addNormalService(String document, String title, String description,List<String> images) throws ServiceException {
         try{
-            Service service = new Service(document, title, description);
+            Service service = new Service(document, title, description,images);
             serviceRepository.save(service);
         }catch(Exception e){
             throw new ServiceException("Error agregando el servicio!");
@@ -33,10 +33,10 @@ public class ServicesService implements IServicesService {
     }
 
     @Override
-    public void addProfesionalService(String document, String title, String description, String hours, int idCategory, String name, String surname) throws ServiceException {
+    public void addProfesionalService(String document, String title, String description, List<String> images, String hours, int idCategory, String name, String surname) throws ServiceException {
         try{
             Category category = categoryRepository.findById(idCategory).get();
-            Service service = new ProfesionalService(document, title, description, hours,category,name,surname);
+            Service service = new ProfesionalService(document, title, description,images,hours,category,name,surname);
             serviceRepository.save(service);
         }catch(Exception e){
             throw new ServiceException("Error agregando el servicio!");

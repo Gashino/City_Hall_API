@@ -53,7 +53,7 @@ public class ServicesController {
     @PostMapping("/create")
     public ResponseEntity<Object> createService(@RequestBody Service service) {
         try {
-            servicesService.addNormalService(service.getDocument(), service.getTitle(), service.getDescription());
+            servicesService.addNormalService(service.getDocument(), service.getTitle(), service.getDescription(), service.getImages());
             return new ResponseEntity<>("Service created", HttpStatus.OK);
         } catch (ServiceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -63,7 +63,7 @@ public class ServicesController {
     @PostMapping("/create/profesional")
     public ResponseEntity<Object> createProfesionalService(@RequestBody ServiceProfesionalDTO service) {
         try {
-            servicesService.addProfesionalService(service.getDocument(),service.getTitle(),service.getDescription(),service.getHours(),service.getCategoryId(),service.getName(),service.getSurname());
+            servicesService.addProfesionalService(service.getDocument(),service.getTitle(),service.getDescription(),service.getImages(),service.getHours(),service.getCategoryId(),service.getName(),service.getSurname());
             return new ResponseEntity<>("Service created", HttpStatus.OK);
         } catch (ServiceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -36,17 +36,33 @@ public class Complaint {
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
     private List<ComplaintMovement> movements;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "imagenesdenuncia",
+            joinColumns = @JoinColumn(name = "iddenuncias")
+    )
+    @Column(name = "nombrearchivo")
+    private List<String> images;
+
     public Complaint() {
     }
 
-    public Complaint(User user, Site site, String description) {
+    public Complaint(User user, Site site, String description, List<String> images) {
         this.user = user;
         this.site = site;
         this.description = description;
         this.status = Status.PENDIENTE.toString();
         this.responsability = true;
+        this.images= images;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public int getIdComplaint() {
         return idComplaint;

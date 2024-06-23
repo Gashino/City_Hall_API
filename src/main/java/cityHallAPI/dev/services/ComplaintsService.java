@@ -33,7 +33,7 @@ public class ComplaintsService implements IComplaintService {
 
 
     @Override
-    public void addComplaint(String document, int idSite, String description,String documentDenounced) throws ComplaintException {
+    public void addComplaint(String document, int idSite, String description,String documentDenounced,List<String>images) throws ComplaintException {
             Optional<User> userOptional = userRepository.findById(document);
             Optional<User> denouncedOptional = userRepository.findById(documentDenounced);
             Optional<Site> siteOptional = siteRepository.findById(idSite);
@@ -44,11 +44,11 @@ public class ComplaintsService implements IComplaintService {
 
                 if(denouncedOptional.isPresent()){
                 User userDenunciado = denouncedOptional.get();
-                complaint = new Complaint(userDenunciado,null,description);
+                complaint = new Complaint(userDenunciado,null,description,images);
                 }
                 else{
                 Site site = siteOptional.get();
-                complaint = new Complaint(null,site,description);
+                complaint = new Complaint(null,site,description,images);
                 }
                 complaintRepository.save(complaint);
                 complaintIssuerRepository.save(new ComplaintIssuer(userDenunciante,complaint));

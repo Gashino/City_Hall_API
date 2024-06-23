@@ -30,7 +30,7 @@ public class ClaimController {
     @PostMapping("/create")
     public ResponseEntity<Object> createClaim(@RequestBody PostClaimDTO claim) {
         try {
-            claimService.createClaim(claim.document, claim.idFlaw, claim.idSite, claim.description);
+            claimService.createClaim(claim.document, claim.idFlaw, claim.idSite, claim.description, claim.images);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

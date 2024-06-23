@@ -29,7 +29,7 @@ public class ClaimService implements IClaimService {
     FlawRepository flawRepository;
 
     @Override
-    public void createClaim(String document, int idFlaw, int idSite, String description) throws ClaimException {
+    public void createClaim(String document, int idFlaw, int idSite, String description,List<String> images) throws ClaimException {
         Optional<User> userOptional = userRepository.findById(document);
         Optional<Site> siteOptional = siteRepository.findById(idSite);
         Optional<Flaw> flawOptional = flawRepository.findById(idFlaw);
@@ -41,7 +41,7 @@ public class ClaimService implements IClaimService {
             User user = userOptional.get();
             Site site = siteOptional.get();
             Flaw flaw = flawOptional.get();
-            Claim claim = new Claim(user, null, site, flaw, description);
+            Claim claim = new Claim(user, null, site, flaw, description,images);
             claimRepository.save(claim);
         }
     }
