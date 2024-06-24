@@ -1,15 +1,9 @@
 package cityHallAPI.dev.services;
 
-import cityHallAPI.dev.entitys.Claim;
-import cityHallAPI.dev.entitys.Flaw;
-import cityHallAPI.dev.entitys.Site;
-import cityHallAPI.dev.entitys.User;
+import cityHallAPI.dev.entitys.*;
 import cityHallAPI.dev.exceptions.ClaimException;
 import cityHallAPI.dev.interfaces.IClaimService;
-import cityHallAPI.dev.repository.ClaimRepository;
-import cityHallAPI.dev.repository.FlawRepository;
-import cityHallAPI.dev.repository.SiteRepository;
-import cityHallAPI.dev.repository.UserRepository;
+import cityHallAPI.dev.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,22 +21,35 @@ public class ClaimService implements IClaimService {
     SiteRepository siteRepository;
     @Autowired
     FlawRepository flawRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @Override
     public void createClaim(String document, int idFlaw, int idSite, String description,List<String> images) throws ClaimException {
         Optional<User> userOptional = userRepository.findById(document);
+        Optional<Employee> employeeOptional = employeeRepository.findByDocument(document);
+
         Optional<Site> siteOptional = siteRepository.findById(idSite);
         Optional<Flaw> flawOptional = flawRepository.findById(idFlaw);
 
-        if(userOptional.isEmpty() || siteOptional.isEmpty() || flawOptional.isEmpty()){
+        if((userOptional.isEmpty() && employeeOptional.isEmpty()) || siteOptional.isEmpty() || flawOptional.isEmpty()){
             throw new ClaimException("User, Site or Flaw not found");
         }
         else{
-            User user = userOptional.get();
-            Site site = siteOptional.get();
-            Flaw flaw = flawOptional.get();
-            Claim claim = new Claim(user, null, site, flaw, description,images);
-            claimRepository.save(claim);
+            if(userOptional.isEmpty()){
+                Employee employee = employeeOptional.get();
+                Site site = siteOptional.get();
+                Flaw flaw = flawOptional.get();
+                Claim claim = new Claim(null, employee, site, flaw, description,images);
+                claimRepository.save(claim);
+            }
+            else {
+                User user = userOptional.get();
+                Site site = siteOptional.get();
+                Flaw flaw = flawOptional.get();
+                Claim claim = new Claim(user, null, site, flaw, description,images);
+                claimRepository.save(claim);
+            }
         }
     }
 

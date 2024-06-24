@@ -1,10 +1,7 @@
 package cityHallAPI.dev.services;
 
 import cityHallAPI.dev.dtos.ComplaintDTO;
-import cityHallAPI.dev.entitys.Complaint;
-import cityHallAPI.dev.entitys.ComplaintIssuer;
-import cityHallAPI.dev.entitys.Site;
-import cityHallAPI.dev.entitys.User;
+import cityHallAPI.dev.entitys.*;
 import cityHallAPI.dev.exceptions.ComplaintException;
 import cityHallAPI.dev.interfaces.IComplaintService;
 import cityHallAPI.dev.repository.*;
@@ -29,13 +26,15 @@ public class ComplaintsService implements IComplaintService {
     SiteRepository siteRepository;
     @Autowired
     ComplaintIssuerRepository complaintIssuerRepository;
+    @Autowired
+    NeighborRepository neighborRepository;
 
 
 
     @Override
     public void addComplaint(String document, int idSite, String description,String documentDenounced,List<String>images) throws ComplaintException {
             Optional<User> userOptional = userRepository.findById(document);
-            Optional<User> denouncedOptional = userRepository.findById(documentDenounced);
+            Optional<Neighbor> denouncedOptional = neighborRepository.findById(documentDenounced);
             Optional<Site> siteOptional = siteRepository.findById(idSite);
             Complaint complaint;
 
@@ -43,7 +42,7 @@ public class ComplaintsService implements IComplaintService {
                 User userDenunciante = userOptional.get();
 
                 if(denouncedOptional.isPresent()){
-                User userDenunciado = denouncedOptional.get();
+                Neighbor userDenunciado = denouncedOptional.get();
                 complaint = new Complaint(userDenunciado,null,description,images);
                 }
                 else{
@@ -63,7 +62,8 @@ public class ComplaintsService implements IComplaintService {
         Optional<User> userOptional = userRepository.findById(document);
         if(userOptional.isPresent()){
             List<ComplaintDTO> complaintsDTO = new ArrayList<>();
-            List<Complaint> complaints = complaintRepository.findByUser(userOptional.get());
+
+            List<Complaint> complaints = complaintRepository.findByDocument(document);
             complaints.forEach(x -> complaintsDTO.add(new ComplaintDTO(x)));
             return complaintsDTO;
         }

@@ -17,7 +17,7 @@ public class Complaint {
 
     @ManyToOne
     @JoinColumn(name = "documento")
-    private User user;
+    private Neighbor user;
 
     @ManyToOne
     @JoinColumn(name = "idsitio")
@@ -47,7 +47,7 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(User user, Site site, String description, List<String> images) {
+    public Complaint(Neighbor user, Site site, String description, List<String> images) {
         this.user = user;
         this.site = site;
         this.description = description;
@@ -72,11 +72,11 @@ public class Complaint {
         this.idComplaint = idComplaint;
     }
 
-    public User getUser() {
+    public Neighbor getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Neighbor user) {
         this.user = user;
     }
 
