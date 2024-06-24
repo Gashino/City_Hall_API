@@ -3,6 +3,8 @@ package cityHallAPI.dev.dtos;
 import cityHallAPI.dev.entitys.Complaint;
 import cityHallAPI.dev.entitys.Site;
 
+import java.util.List;
+
 public class ComplaintDTO {
     public int idComplaint;
     public String siteStreet;
@@ -10,6 +12,7 @@ public class ComplaintDTO {
     public String description;
     public String status;
     public String documentDenounced;
+    public List<String> images;
 
 
     public ComplaintDTO(Complaint x){
@@ -19,6 +22,7 @@ public class ComplaintDTO {
         documentDenounced = (x.getUser() == null) ? null : x.getUser().getDocument();
         description = x.getDescription();
         status = x.getStatus();
+        images = x.getImages();
     }
 
     public int getIdComplaint() {
@@ -67,6 +71,14 @@ public class ComplaintDTO {
 
     public void setDocumentDenounced(String documentDenounced) {
         this.documentDenounced = documentDenounced;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IClaimService {
 
-public void createClaim(String document, int idFlaw,int idSite, String description) throws ClaimException;
+public void createClaim(String document, int idFlaw,int idSite, String description, List<String> images) throws ClaimException;
 
 public List<Claim> getAllClaims() throws ClaimException;
 

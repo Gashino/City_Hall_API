@@ -2,6 +2,8 @@ package cityHallAPI.dev.entitys;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "servicios")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -28,14 +30,31 @@ public class Service {
     @Column(name = "isprofesional")
     private boolean isProfesional;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "imagenesservicio",
+            joinColumns = @JoinColumn(name = "idservicio")
+    )
+    @Column(name = "nombrearchivo")
+    private List<String> images;
+
     public Service(){}
 
-    public Service(String document, String title, String description) {
+    public Service(String document, String title, String description, List<String> images) {
         this.document = document;
         this.title = title;
         this.description = description;
         this.isActive = false;
         this.isProfesional = false;
+        this.images = images;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public int getIdService() {

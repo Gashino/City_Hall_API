@@ -22,7 +22,7 @@ public class ComplaintController {
     @PostMapping("/create")
     public ResponseEntity<Object> createComplaint(@RequestBody PostComplaintDTO complaint){
         try {
-            complaintService.addComplaint(complaint.issuerDocument,complaint.siteId,complaint.description,complaint.denouncedDocument);
+            complaintService.addComplaint(complaint.issuerDocument,complaint.siteId,complaint.description,complaint.denouncedDocument,complaint.images);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

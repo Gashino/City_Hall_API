@@ -1,5 +1,7 @@
 package cityHallAPI.dev.utill;
 
+import java.util.List;
+
 public class ServiceProfesionalDTO {
 
     private String document;
@@ -9,8 +11,9 @@ public class ServiceProfesionalDTO {
     private int categoryId;
     private String name;
     private String surname;
+    private List<String> images;
 
-    public ServiceProfesionalDTO(int categoryId, String document, String title, String description, String hours, String name, String surname) {
+    public ServiceProfesionalDTO(int categoryId, String document, String title, String description,List<String> images, String hours, String name, String surname) {
         this.categoryId = categoryId;
         this.document = document;
         this.title = title;
@@ -18,6 +21,7 @@ public class ServiceProfesionalDTO {
         this.hours = hours;
         this.name = name;
         this.surname = surname;
+        this.images = images;
     }
     public ServiceProfesionalDTO() {}
 
@@ -75,5 +79,13 @@ public class ServiceProfesionalDTO {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

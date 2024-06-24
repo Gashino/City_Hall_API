@@ -43,15 +43,24 @@ public class Claim {
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "claim")
     private List<ClaimMovement> movements;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "imagenesreclamos",
+            joinColumns = @JoinColumn(name = "idreclamo")
+    )
+    @Column(name = "nombrearchivo")
+    private List<String> images;
+
 
     public Claim(User user, Employee employee, Site site, Flaw flaw ,
-                 String description) {
+                 String description,List<String> images) {
         this.flaw = flaw;
         this.user = user;
         this.employee = employee;
         this.site = site;
         this.description = description;
         this.status = Status.EN_PROCESO.toString();
+        this.images = images;
     }
 
     public Claim(){}
@@ -126,5 +135,13 @@ public class Claim {
 
     public void setMovements(List<ClaimMovement> movements) {
         this.movements = movements;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

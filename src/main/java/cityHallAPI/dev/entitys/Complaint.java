@@ -17,7 +17,7 @@ public class Complaint {
 
     @ManyToOne
     @JoinColumn(name = "documento")
-    private User user;
+    private Neighbor user;
 
     @ManyToOne
     @JoinColumn(name = "idsitio")
@@ -36,17 +36,33 @@ public class Complaint {
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
     private List<ComplaintMovement> movements;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "imagenesdenuncia",
+            joinColumns = @JoinColumn(name = "iddenuncias")
+    )
+    @Column(name = "nombrearchivo")
+    private List<String> images;
+
     public Complaint() {
     }
 
-    public Complaint(User user, Site site, String description) {
+    public Complaint(Neighbor user, Site site, String description, List<String> images) {
         this.user = user;
         this.site = site;
         this.description = description;
         this.status = Status.PENDIENTE.toString();
         this.responsability = true;
+        this.images= images;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public int getIdComplaint() {
         return idComplaint;
@@ -56,11 +72,11 @@ public class Complaint {
         this.idComplaint = idComplaint;
     }
 
-    public User getUser() {
+    public Neighbor getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Neighbor user) {
         this.user = user;
     }
 
