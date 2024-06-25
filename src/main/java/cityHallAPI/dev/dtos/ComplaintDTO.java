@@ -1,6 +1,7 @@
 package cityHallAPI.dev.dtos;
 
 import cityHallAPI.dev.entitys.Complaint;
+import cityHallAPI.dev.entitys.ComplaintMovement;
 import cityHallAPI.dev.entitys.Site;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class ComplaintDTO {
     public String status;
     public String documentDenounced;
     public List<String> images;
+    public List<ComplaintMovement> movements;
 
 
     public ComplaintDTO(Complaint x){
@@ -23,6 +25,7 @@ public class ComplaintDTO {
         description = x.getDescription();
         status = x.getStatus();
         images = x.getImages();
+        movements = x.getMovements();
     }
 
     public int getIdComplaint() {
@@ -79,6 +82,14 @@ public class ComplaintDTO {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public List<ComplaintMovement> getMovements() {
+        return movements;
+    }
+
+    public void setMovements(List<ComplaintMovement> movements) {
+        this.movements = movements;
     }
 }
 

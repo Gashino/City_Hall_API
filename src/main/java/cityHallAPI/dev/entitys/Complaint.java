@@ -1,6 +1,7 @@
 package cityHallAPI.dev.entitys;
 
 import cityHallAPI.dev.utill.Status;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import javax.naming.Name;
@@ -33,7 +34,8 @@ public class Complaint {
     private boolean responsability;
 
 
-    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "complaint")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "complaint")
+    @JsonManagedReference
     private List<ComplaintMovement> movements;
 
     @ElementCollection

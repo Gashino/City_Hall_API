@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-//@EnableScheduling
+@EnableScheduling
 public class NotificationsMonitor {
 
     @Autowired
@@ -25,9 +25,9 @@ public class NotificationsMonitor {
         System.out.println("Checking for changes");
         List<Change> changes = changeRepository.findAllUnnotifiedChanges();
         for (Change change : changes) {
-            String tipoReclamo = change.getType();
-            notificationService.sendPushNotification(change.getExpoPushToken(), "Actualizacion en " + tipoReclamo, "Su " +
-                    tipoReclamo + " con ID #"+ change.getIdType() + " ha sido actualizado");
+            String tipo = change.getType();
+            notificationService.sendPushNotification(change.getExpoPushToken(), "Actualizacion en " + tipo, "Su " +
+                    tipo + " con ID #"+ change.getIdType() + " ha sido actualizado");
             change.setNotified(true);
             changeRepository.save(change);
         }
