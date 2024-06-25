@@ -79,6 +79,7 @@ public class UserService implements IUserService {
                 email= user.getEmail();
                 district = neighbor.getDistrict().getName();
                 isAdmin = false;
+                firstLogin = user.isFirstLogin();
             }};
 
             if(user.isActive()){
@@ -114,6 +115,7 @@ public class UserService implements IUserService {
         if(userOpt.isPresent()){
             User user = userOpt.get();
             user.setPassword(newPassword);
+            user.setFirstLogin(false);
 
             userRepository.save(user);
         }

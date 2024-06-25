@@ -18,6 +18,8 @@ public class UserDto {
 
     public String direction;
 
+    public boolean firstLogin;
+
 
     public UserDto(String name, String surname, String document,
                    String email) {
@@ -30,5 +32,20 @@ public class UserDto {
 
     public UserDto() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", document='" + document + '\'' +
+                ", email='" + email + '\'' +
+                ", district='" + district + '\'' +
+                ", isActive=" + isActive +
+                ", isAdmin=" + isAdmin +
+                ", direction='" + direction + '\'' +
+                ", firstLogin=" + firstLogin +
+                '}';
     }
 }

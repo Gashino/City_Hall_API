@@ -22,6 +22,9 @@ public class User {
     @Column(name = "expopushtoken")
     private String expoPushToken;
 
+    @Column(name = "primeringreso")
+    private boolean firstLogin;
+
     public User() {
     }
 
@@ -31,8 +34,16 @@ public class User {
         this.password = password;
         this.isActive = true;
         this.expoPushToken = expoPushToken;
+        this.firstLogin = true;
     }
 
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
 
     public String getExpoPushToken() {
         return expoPushToken;
