@@ -1,6 +1,7 @@
 package cityHallAPI.dev.entitys;
 
 import cityHallAPI.dev.utill.Status;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -40,7 +41,8 @@ public class Claim {
     @Column(name = "idreclamounificado")
     private int idUnifiedClaim;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "claim")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "claim")
+    @JsonManagedReference
     private List<ClaimMovement> movements;
 
     @ElementCollection

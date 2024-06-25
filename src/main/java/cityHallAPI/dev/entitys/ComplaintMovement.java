@@ -1,5 +1,6 @@
 package cityHallAPI.dev.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ public class ComplaintMovement {
 
     @ManyToOne
     @JoinColumn(name = "iddenuncias")
+    @JsonBackReference
     private Complaint complaint;
 
     @Column(name = "responsable")
@@ -29,6 +31,43 @@ public class ComplaintMovement {
     public ComplaintMovement() {
     }
 
+    public String getResponsible() {
+        return responsible;
+    }
 
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
 
+    public int getIdMovement() {
+        return idMovement;
+    }
+
+    public void setIdMovement(int idMovement) {
+        this.idMovement = idMovement;
+    }
+
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
