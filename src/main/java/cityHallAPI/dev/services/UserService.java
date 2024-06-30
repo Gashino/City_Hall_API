@@ -88,7 +88,7 @@ public class UserService implements IUserService {
             }
             throw new UserException("Usuario inactivo");
         }
-        else if(employeeOptional.isPresent()){
+        else if(employeeOptional.isPresent() && employeeOptional.get().getInternCategory()==8){
             Employee employee = employeeOptional.get();
 
             return new UserAdminDto()

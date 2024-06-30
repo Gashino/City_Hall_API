@@ -22,7 +22,6 @@ public class NotificationsMonitor {
 
     @Scheduled(fixedRate = 10000)
     public void checkForChanges() {
-        System.out.println("Checking for changes");
         List<Change> changes = changeRepository.findAllUnnotifiedChanges();
         for (Change change : changes) {
             String tipo = change.getType();
