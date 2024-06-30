@@ -27,8 +27,13 @@ public class Employee {
     @Column(name = "sector")
     private String department;
 
+    @Column(name = "categoria")
+    private int internCategory;
+
     @ManyToOne
-    @JoinColumn(name = "idrubro")
+    @JoinTable(name = "personalrubro",
+            joinColumns = @JoinColumn(name = "legajo", referencedColumnName = "legajo"),
+            inverseJoinColumns = @JoinColumn(name = "idrubro", referencedColumnName = "idrubro"))
     private Category category;
 
     @Column(name = "fechaingreso")
@@ -37,13 +42,18 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String lastName, String document, String department, Category category, Date startDate) {
+    public Employee(String name, String lastName, String document, String department, int internCategory, Category category, Date startDate) {
         this.name = name;
         this.lastName = lastName;
         this.document = document;
         this.department = department;
+        this.internCategory = internCategory;
         this.category = category;
         this.startDate = startDate;
+    }
+
+    public int getInternCategory() {
+        return internCategory;
     }
 
     public int getEmployeeId() {
