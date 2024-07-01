@@ -25,7 +25,8 @@ public class NotificationsMonitor {
         List<Change> changes = changeRepository.findAllUnnotifiedChanges();
         for (Change change : changes) {
             String tipo = change.getType();
-            notificationService.sendPushNotification(change.getExpoPushToken(), "Actualizacion en " + tipo, "Su " +
+            String token = change.getExpoPushToken() != null ? change.getExpoPushToken() : "ExponentPushToken[3QyEgMMno51AT7zRsWtbUP]";
+            notificationService.sendPushNotification(token, "Actualizacion en " + tipo, "Su " +
                     tipo + " con ID #"+ change.getIdType() + " ha sido actualizado");
             change.setNotified(true);
             changeRepository.save(change);

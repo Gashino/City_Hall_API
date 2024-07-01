@@ -55,7 +55,7 @@ public class ClaimService implements IClaimService {
 
     @Override
     public List<Claim> getAllClaims() throws ClaimException {
-        return claimRepository.findAll();
+        return claimRepository.findAllReclamos();
     }
 
     @Override
